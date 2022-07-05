@@ -10,6 +10,7 @@ import br.com.zup.desafioandroidcore.domain.model.Product
 interface ProductDAO {
     @Query("SELECT * FROM produto ORDER BY nome_produto ASC")
     fun getAllProducts():List<Product>
+    
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProduct(product: Product)
 }
