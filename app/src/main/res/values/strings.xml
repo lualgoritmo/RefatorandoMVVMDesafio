@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">SimCity São João</string>
+    <string name="festa_de_simcity">Festa de Sim City</string>
+    <string name="title_activity_home">Leanback HomeActivity</string>
+    <string name="browse_title">Videos by Your Company</string>
+    <string name="related_movies">Related Videos</string>
+    <string name="grid_view">Grid View</string>
+    <string name="error_fragment">Error Fragment</string>
+    <string name="personal_settings">Personal Settings</string>
+    <string name="watch_trailer_1">Watch trailer</string>
+    <string name="watch_trailer_2">FREE</string>
+    <string name="rent_1">Rent By Day</string>
+    <string name="rent_2">From $1.99</string>
+    <string name="buy_1">Buy and Own</string>
+    <string name="buy_2">AT $9.99</string>
+    <string name="movie">Movie</string>
+
+    <!-- Error messages -->
+    <string name="error_fragment_message">An error occurred</string>
+    <string name="dismiss_error">Dismiss</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txtView_titulo">Cadastro de Produto</string>
+    <string name="txtEdit_nomeProduto">Nome do Produto</string>
+    <string name="txtEdit_quantidadeProduto">Quantidade de Produtos</string>
+    <string name="txtEdit_valorProduto">Valor(unitário) do Produto</string>
+    <string name="txtEdit_receita">Receita</string>
+    <string name="btnCadastrarProduto">CADASTRAR NOVO PRODUTO</string>
+    <string name="btnVerProdutos">Ver Produtos</string>
+    <string name="txtCadastrarNovoProduto">Cadastrar Novos Produtos</string>
+    <string name="txtTitulo_produtosCadastrados">Produtos Cadastrados</string>
+    <string name="txtApresentacaoHome">Seja bem vindos a festa Junina!</string>
+    <string name="btn_irProdutos">Ir para Produtos</string>
+    <string name="txtApresentacaoSimCity">Festas juninas, é algo muito bom! E em SimCity não é diferente, Aqui nesse
+        app você consegue organizar a sua lista de compras para a sua festa junina de maneira fácil e simples, só cadastrar os produtos da sua receita e se divertir!</string>
+    <string name="txtDescriptionImage">Imagem da Lista de Produtos Cadastrados</string>
+    <string name="tituloNavProdutos">Produtos</string>
+    <string name="tituloNavProdutosCadastrados">Produtos Cadastrados</string>
+</resources>
