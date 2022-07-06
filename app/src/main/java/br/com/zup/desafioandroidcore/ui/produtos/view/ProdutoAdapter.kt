@@ -3,10 +3,10 @@ package br.com.zup.desafioandroidcore.ui.produtos.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.zup.desafioandroidcore.domain.model.Product
+import br.com.zup.desafioandroidcore.domain.model.Produto
 import br.com.zup.desafioandroidcore.databinding.ProdutoItemBinding
 
-class ProdutoAdapter(private var listaProduto: MutableList<Product>, private val onClick:(produto: Product)->Unit) :
+class ProdutoAdapter(private var listaProduto: MutableList<Produto>, private val onClick:(produto: Produto)->Unit) :
     RecyclerView.Adapter<ProdutoAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,11 +27,11 @@ class ProdutoAdapter(private var listaProduto: MutableList<Product>, private val
     }
 
     class ViewHolder(val binding: ProdutoItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun exibirInformacaoesNaTextView(produto: Product) {
+        fun exibirInformacaoesNaTextView(produto: Produto) {
             binding.txtNome.text = "${produto.quantidade} - ${produto.nome}"
         }
     }
-    fun atualizarListaProduto(novaListaProduto: MutableList<Product>) {
+    fun atualizarListaProduto(novaListaProduto: MutableList<Produto>) {
         if (listaProduto.size == 0) {
             listaProduto = novaListaProduto
         }

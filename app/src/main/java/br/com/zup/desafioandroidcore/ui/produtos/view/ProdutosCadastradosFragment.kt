@@ -10,7 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.zup.desafioandroidcore.R
 import br.com.zup.desafioandroidcore.ui.produtos.view.ProdutoAdapter
-import br.com.zup.desafioandroidcore.domain.model.Product
+import br.com.zup.desafioandroidcore.domain.model.Produto
 import br.com.zup.desafioandroidcore.databinding.FragmentProdutosCadastradosBinding
 
 class ProdutosCadastrados : Fragment() {
@@ -30,7 +30,7 @@ class ProdutosCadastrados : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         exibirRecyclerView()
     }
-    fun onClick(produto: Product) {
+    fun onClick(produto: Produto) {
         val bundle = bundleOf("PRODUTO" to produto)
         NavHostFragment.findNavController(this)
             .navigate(R.id.action_produtosCadastrados2_to_detalheProdutoFragment,bundle)
@@ -40,7 +40,7 @@ class ProdutosCadastrados : Fragment() {
         binding.rvListaProdutosCadastrados.layoutManager = LinearLayoutManager(context)
     }
     private fun recebendoDados() {
-        val produtos = arguments?.getParcelableArrayList<Product>("PRODUTOS")
+        val produtos = arguments?.getParcelableArrayList<Produto>("PRODUTOS")
         if (produtos != null) {
             produtoAdapter.atualizarListaProduto(produtos)
         }

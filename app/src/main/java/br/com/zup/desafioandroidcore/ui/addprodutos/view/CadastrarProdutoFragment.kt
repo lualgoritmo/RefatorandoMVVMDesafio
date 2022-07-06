@@ -8,13 +8,13 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import br.com.zup.desafioandroidcore.domain.model.Product
 import br.com.zup.desafioandroidcore.R
 import br.com.zup.desafioandroidcore.databinding.FragmentProdutoCadastrarBinding
+import br.com.zup.desafioandroidcore.domain.model.Produto
 
 class CadastrarProdutoFragment : Fragment() {
     private lateinit var binding: FragmentProdutoCadastrarBinding
-    private val produtos = mutableListOf<Product>()
+    private val produtos = mutableListOf<Produto>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +32,7 @@ class CadastrarProdutoFragment : Fragment() {
         binding.btnMostrarProdutos.setOnClickListener {
             val bundle = bundleOf("PRODUTOS" to produtos)
             NavHostFragment.findNavController(this)
-                .navigate(R.id.action_produtoCadastrar3_to_produtosCadastrados2,bundle)
+                .navigate(R.id.action_produtoCadastrar3_to_produtosCadastrados2, bundle)
         }
 
     }
@@ -44,20 +44,21 @@ class CadastrarProdutoFragment : Fragment() {
         binding.editReceita.text.clear()
     }
 
-    private fun recuperarDadosEditText(): Product? {
+    private fun recuperarDadosEditText(): Produto? {
         val nomeProduto = binding.editTextNomeCadastroProduto.text.toString()
         val quantidadeProduto = binding.editQuantidadeProduto.text.toString()
         val valorUnitarioProduto = binding.editValorUnicoProduto.text.toString()
         val receitaProduto = binding.editReceita.text.toString()
         if (nomeProduto.isNotEmpty() && quantidadeProduto.isNotEmpty() && valorUnitarioProduto.isNotEmpty() && receitaProduto.isNotEmpty()) {
-            return Product(
+            return Produto(
+                0,
                 nomeProduto,
-                quantidadeProduto.toDouble(),
-                valorUnitarioProduto.toDouble(),
+                quantidadeProduto.toInt(),
+                valorUnitarioProduto.toFloat(),
+                total = 0.0f,
                 receitaProduto
             )
-        }
-        else {
+        } else {
             binding.editTextNomeCadastroProduto.error = "O nome é um campo obrigatório"
             binding.editQuantidadeProduto.error = "A quantidade é um campo obrigatório"
             binding.editValorUnicoProduto.error = "O valor único é um campo obrigatório"
