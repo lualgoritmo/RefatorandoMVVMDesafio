@@ -5,4 +5,5 @@ import br.com.zup.desafioandroidcore.data.datasource.local.ProductDataBase
 
 class ProductUseCase(application: Application) {
     private val productDao = ProductDataBase
+    //COMEÇANDO
 }
