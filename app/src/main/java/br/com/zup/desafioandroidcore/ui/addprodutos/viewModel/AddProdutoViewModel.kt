@@ -10,12 +10,13 @@ import br.com.zup.desafioandroidcore.ui.viewstate.ViewState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-//MELHOR USAR UM CONTEXT NO LUGAR DO APPLICATION
+
+//MELHOR USAR UM CONTEXT NO LUGAR DO APPLICATION DE ACORDO COM O MENTOR
 class AddProdutoViewModel(application: Application) : AndroidViewModel(application) {
     private val produtoUseCase = ProdutoUseCase(application)
     val produtoAddState = MutableLiveData<ViewState<Produto>>()
 
-    fun insertProduto(produto:Produto) {
+    fun insertProduto(produto: Produto) {
         viewModelScope.launch {
             try {
                 val response = withContext(Dispatchers.IO) {
@@ -24,7 +25,7 @@ class AddProdutoViewModel(application: Application) : AndroidViewModel(applicati
                 produtoAddState.value = response
             } catch (ex: Exception) {
                 produtoAddState.value =
-                    ViewState.Error(Throwable("Não foi possível inserir o filme!"))
+                    ViewState.Error(Throwable("Não foi possível inserir o produto!"))
             }
         }
     }
