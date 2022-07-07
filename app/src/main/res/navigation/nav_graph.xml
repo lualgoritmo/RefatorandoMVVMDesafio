@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/detalheProdutoFragment"
-        android:name="br.com.zup.desafioandroidcore.ui.detalheproduto.DetalheProdutoFragment"
-        android:label="fragment_detalhe_produto"
+        android:name="br.com.zup.desafioandroidcore.ui.detalheproduto.view.DetalheProdutoFragment"
+        android:label="Detalhe do Produto"
         tools:layout="@layout/fragment_detalhe_produto" />
 </navigation>

@@ -7,14 +7,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
-import br.com.zup.desafioandroidcore.domain.model.Product
 import br.com.zup.desafioandroidcore.R
 import br.com.zup.desafioandroidcore.databinding.FragmentProdutoCadastrarBinding
+import br.com.zup.desafioandroidcore.domain.model.Produto
+import br.com.zup.desafioandroidcore.ui.addprodutos.viewModel.AddProdutoViewModel
+import br.com.zup.desafioandroidcore.ui.viewstate.ViewState
 
 class CadastrarProdutoFragment : Fragment() {
     private lateinit var binding: FragmentProdutoCadastrarBinding
-    private val produtos = mutableListOf<Product>()
+    private val produtos = mutableListOf<Produto>()
+    private val viewModel: AddProdutoViewModel by lazy {
+        ViewModelProvider(this)[AddProdutoViewModel::class.java]
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,13 +33,14 @@ class CadastrarProdutoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observe()
         binding.btnCadastrarProduto.setOnClickListener {
             adicionarProdutoItem()
         }
         binding.btnMostrarProdutos.setOnClickListener {
             val bundle = bundleOf("PRODUTOS" to produtos)
             NavHostFragment.findNavController(this)
-                .navigate(R.id.action_produtoCadastrar3_to_produtosCadastrados2,bundle)
+                .navigate(R.id.action_produtoCadastrar3_to_produtosCadastrados2, bundle)
         }
 
     }
@@ -44,20 +52,21 @@ class CadastrarProdutoFragment : Fragment() {
         binding.editReceita.text.clear()
     }
 
-    private fun recuperarDadosEditText(): Product? {
+    private fun recuperarDadosEditText(): Produto? {
         val nomeProduto = binding.editTextNomeCadastroProduto.text.toString()
         val quantidadeProduto = binding.editQuantidadeProduto.text.toString()
         val valorUnitarioProduto = binding.editValorUnicoProduto.text.toString()
         val receitaProduto = binding.editReceita.text.toString()
         if (nomeProduto.isNotEmpty() && quantidadeProduto.isNotEmpty() && valorUnitarioProduto.isNotEmpty() && receitaProduto.isNotEmpty()) {
-            return Product(
+            return Produto(
+                0,
                 nomeProduto,
-                quantidadeProduto.toDouble(),
-                valorUnitarioProduto.toDouble(),
+                quantidadeProduto.toInt(),
+                valorUnitarioProduto.toFloat(),
+                total = 0.0f,
                 receitaProduto
             )
-        }
-        else {
+        } else {
             binding.editTextNomeCadastroProduto.error = "O nome é um campo obrigatório"
             binding.editQuantidadeProduto.error = "A quantidade é um campo obrigatório"
             binding.editValorUnicoProduto.error = "O valor único é um campo obrigatório"
@@ -69,9 +78,22 @@ class CadastrarProdutoFragment : Fragment() {
     private fun adicionarProdutoItem() {
         val produto = recuperarDadosEditText()
         if (produto != null) {
-            produtos.add(produto)
-            Toast.makeText(context, "Produto cadastrado com sucesso!", Toast.LENGTH_LONG).show()
+            viewModel.insertProduto(produto)
+//            produtos.add(produto)
             limparCampos()
+        }
+    }
+
+    private fun observe() {
+        viewModel.produtoAddState.observe(this.viewLifecycleOwner) {
+            when (it) {
+                is ViewState.Success -> {
+                    Toast.makeText(context, "Produto cadastrado com sucesso!", Toast.LENGTH_LONG).show()
+                }
+                is ViewState.Error -> {
+                    Toast.makeText(context, it.throwable.message, Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 }
