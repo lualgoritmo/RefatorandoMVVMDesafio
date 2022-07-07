@@ -7,14 +7,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import br.com.zup.desafioandroidcore.R
 import br.com.zup.desafioandroidcore.databinding.FragmentProdutoCadastrarBinding
 import br.com.zup.desafioandroidcore.domain.model.Produto
+import br.com.zup.desafioandroidcore.ui.addprodutos.viewModel.AddProdutoViewModel
+import br.com.zup.desafioandroidcore.ui.viewstate.ViewState
 
 class CadastrarProdutoFragment : Fragment() {
     private lateinit var binding: FragmentProdutoCadastrarBinding
     private val produtos = mutableListOf<Produto>()
+    private val viewModel: AddProdutoViewModel by lazy {
+        ViewModelProvider(this)[AddProdutoViewModel::class.java]
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +33,7 @@ class CadastrarProdutoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observe()
         binding.btnCadastrarProduto.setOnClickListener {
             adicionarProdutoItem()
         }
@@ -70,9 +78,22 @@ class CadastrarProdutoFragment : Fragment() {
     private fun adicionarProdutoItem() {
         val produto = recuperarDadosEditText()
         if (produto != null) {
-            produtos.add(produto)
-            Toast.makeText(context, "Produto cadastrado com sucesso!", Toast.LENGTH_LONG).show()
+            viewModel.insertProduto(produto)
+//            produtos.add(produto)
             limparCampos()
+        }
+    }
+
+    private fun observe() {
+        viewModel.produtoAddState.observe(this.viewLifecycleOwner) {
+            when (it) {
+                is ViewState.Success -> {
+                    Toast.makeText(context, "Produto cadastrado com sucesso!", Toast.LENGTH_LONG).show()
+                }
+                is ViewState.Error -> {
+                    Toast.makeText(context, it.throwable.message, Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package br.com.zup.desafioandroidcore.ui.detalheproduto
+package br.com.zup.desafioandroidcore.ui.detalheproduto.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
