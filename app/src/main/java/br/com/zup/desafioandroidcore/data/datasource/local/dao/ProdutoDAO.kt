@@ -4,12 +4,13 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import br.com.zup.desafioandroidcore.domain.model.Product
+import br.com.zup.desafioandroidcore.domain.model.Produto
 
 @Dao
-interface ProductDAO {
+interface ProdutoDAO {
     @Query("SELECT * FROM produto ORDER BY nome_produto ASC")
-    fun getAllProducts():List<Product>
+    fun getAllProdutos(): List<Produto>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProduct(product: Product)
+    fun insertProduto(product:Produto)
 }
